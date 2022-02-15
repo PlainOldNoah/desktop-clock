@@ -1,0 +1,136 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/main_theme.theme" type="Theme" id=1]
+[ext_resource path="res://scenes/HealthModule.gd" type="Script" id=2]
+
+[node name="HealthModule" type="PanelContainer"]
+margin_right = 273.0
+margin_bottom = 126.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 269.0
+margin_bottom = 122.0
+custom_constants/margin_right = 10
+custom_constants/margin_top = 10
+custom_constants/margin_left = 10
+custom_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 255.0
+margin_bottom = 108.0
+custom_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+margin_right = 245.0
+margin_bottom = 98.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_right = 245.0
+margin_bottom = 64.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+margin_right = 245.0
+margin_bottom = 24.0
+
+[node name="NightModeBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_right = 90.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 90, 0 )
+focus_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+toggle_mode = true
+shortcut_in_tooltip = false
+pressed = true
+enabled_focus_mode = 0
+text = "Night Mode"
+
+[node name="NightModeLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
+margin_left = 94.0
+margin_top = 5.0
+margin_right = 245.0
+margin_bottom = 19.0
+size_flags_horizontal = 3
+text = "Set from 00:00 to 00:00"
+align = 1
+valign = 1
+
+[node name="NightStartSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 28.0
+margin_right = 245.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1440.0
+step = 30.0
+rounded = true
+tick_count = 5
+ticks_on_borders = true
+
+[node name="NightEndSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+margin_top = 48.0
+margin_right = 245.0
+margin_bottom = 64.0
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1440.0
+step = 30.0
+rounded = true
+tick_count = 5
+ticks_on_borders = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+margin_top = 74.0
+margin_right = 245.0
+margin_bottom = 98.0
+custom_constants/separation = 10
+
+[node name="MovementBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_right = 83.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 83, 0 )
+focus_mode = 0
+toggle_mode = true
+shortcut_in_tooltip = false
+pressed = true
+enabled_focus_mode = 0
+text = "Movement"
+
+[node name="MovementMinSlide" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 93.0
+margin_right = 183.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 60.0
+rounded = true
+tick_count = 5
+ticks_on_borders = true
+
+[node name="MovementLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+margin_left = 193.0
+margin_top = 5.0
+margin_right = 245.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 52, 0 )
+size_flags_vertical = 6
+text = "0 Mins"
+align = 2
+valign = 1
+[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/NightModeBtn" to="." method="_on_NightModeBtn_toggled"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/NightStartSlider" to="." method="_on_NightStartSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/NightEndSlider" to="." method="_on_NightEndSlider_value_changed"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/MovementBtn" to="." method="_on_MovementBtn_toggled"]
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/MovementMinSlide" to="." method="_on_MovementMinSlide_value_changed"]
