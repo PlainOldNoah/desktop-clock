@@ -155,3 +155,14 @@ func _on_ToggleHourChime_toggled(button_pressed):
 
 func _on_ToggleHalfHourChime_toggled(button_pressed):
 	halfHourlyChime = button_pressed
+
+
+func _on_TEST_pressed():
+	print(Manager.get_12HMS())
+	print(Manager.get_24HMS())
+	print(Manager.get_raw_mins())
+	
+	Manager.tween_label_color_change(display_label, Color.red, Color.yellow, 2) # Option 1
+
+#	Manager.TweenNode.interpolate_property(display_label, "custom_colors/font_color", Color.aliceblue, Color.yellow, 2, Tween.TRANS_LINEAR) # Tick down the progress bar as time passes OPTION 2
+#	Manager.TweenNode.start()
