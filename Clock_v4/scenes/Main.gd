@@ -56,9 +56,9 @@ func set_time():
 	if pastMinute != minute: # If the minute has changed
 		emit_signal("new_time", hour, minute)
 		if hourlyChime and minute == 0: # Hourly Chime
-			alarm_module.play_chime(3)
+			Manager.play_chime(3)
 		elif halfHourlyChime and minute == 30: # Half-Hourly Chime
-			alarm_module.play_chime(2)
+			Manager.play_chime(2)
 	
 	update_display()
 
@@ -158,11 +158,33 @@ func _on_ToggleHalfHourChime_toggled(button_pressed):
 
 
 func _on_TEST_pressed():
-	print(Manager.get_12HMS())
-	print(Manager.get_24HMS())
-	print(Manager.get_raw_mins())
+#	print(Manager.convert_to_human_time(-1))
+#	print(Manager.convert_to_human_time(0))
+#	print(Manager.convert_to_human_time(1))
+#	print(Manager.convert_to_human_time(1439))
+#	print(Manager.convert_to_human_time(1440))
+#	print(Manager.convert_to_human_time(1441))
+#	print(Manager.convert_to_human_time(719))
+#	print(Manager.convert_to_human_time(720))
+#	print(Manager.convert_to_human_time(721))
+#	print(Manager.convert_to_human_time(-1, false))
+#	print(Manager.convert_to_human_time(0, false))
+#	print(Manager.convert_to_human_time(1, false))
+#	print(Manager.convert_to_human_time(1439, false))
+#	print(Manager.convert_to_human_time(1440, false))
+#	print(Manager.convert_to_human_time(1441, false))
+#	print(Manager.convert_to_human_time(719, false))
+#	print(Manager.convert_to_human_time(720, false))
+#	print(Manager.convert_to_human_time(721, false))
 	
-	Manager.tween_label_color_change(display_label, Color.red, Color.yellow, 2) # Option 1
+#	Manager.play_chime(3)
+	
+#	print(Manager.get_12HMS())
+#	print(Manager.get_24HMS())
+#	print(Manager.get_raw_mins())
+#
+#	Manager.tween_label_color_change(display_label, Color.red, Color.yellow, 2) # Option 1
 
 #	Manager.TweenNode.interpolate_property(display_label, "custom_colors/font_color", Color.aliceblue, Color.yellow, 2, Tween.TRANS_LINEAR) # Tick down the progress bar as time passes OPTION 2
 #	Manager.TweenNode.start()
+	pass

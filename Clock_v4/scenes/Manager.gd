@@ -1,6 +1,7 @@
 extends Node
 
 onready var TweenNode = $Tween
+onready var Chime = $Chime
 
 
 # Prints the status of the manager
@@ -33,9 +34,43 @@ func get_raw_mins() -> int:
 	return ((temp.hour * 60) + temp.minute)
 
 
+func get_full_time() -> Dictionary:
+	var output = {
+		"H12":0,
+		"H24":0,
+		"Min":0,
+		"Raw":0,
+	}
+	return output
+
+
 # Returns raw minutes from a given hour and minutes
 func convert_to_raw_minutes(hour:int, mins:int) -> int:
 	return ((hour * 60) + mins)
+
+
+# Takes in raw_mins and converts it into human readable format HH:MMm
+func convert_to_human_time(raw_mins:int, HR12:bool=true) -> String:
+	# Clean raw minutes
+	if raw_mins < 0:
+		print_debug("ERROR: Invalid raw_mins")
+		return("")
+		
+	raw_mins %= 1440
+	
+	# Set meridian
+	var meridian:String = ""
+	if HR12 == true:
+		meridian = "a" if raw_mins < 720 else "p"
+		
+	# Set hour
+	var hour:int = raw_mins / 60
+	if HR12 == true:
+		hour %= 12
+		if hour < 1: hour += 12
+		
+	var output:String = "%d:%02d%s" % [hour, (raw_mins % 60), meridian]
+	return(str(raw_mins) + " -> " + output)
 
 
 # ============================================================ FUNCS
@@ -45,3 +80,10 @@ func convert_to_raw_minutes(hour:int, mins:int) -> int:
 func tween_label_color_change(node:Label, color1:Color, color2:Color, time:int=1):
 	TweenNode.interpolate_property(node, "custom_colors/font_color", color1, color2, time, Tween.TRANS_LINEAR)
 	TweenNode.start()
+
+
+# Takes in an int and plays the chime that many times
+func play_chime(count:int):
+	for i in count:
+		Chime.play()
+		yield(Chime, "finished")

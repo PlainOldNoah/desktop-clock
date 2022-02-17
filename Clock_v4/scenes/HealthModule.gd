@@ -34,13 +34,13 @@ func check_if_night_mode(newTime:int):
 	
 #	if (start >= end) and ((newTime >= start and newTime <= 1440) or (newTime >= 0 and newTime < end)): # When time is between start and end (or equal) with wraparound
 	if (start >= end) and not ((end < newTime) and (newTime <= start)): # When time is between start and end (or equal) with wraparound
-		print("TRUE", ", ", start, ", ", newTime, ", ", end)
+#		print("TRUE", ", ", start, ", ", newTime, ", ", end)
 		self.get_parent().get_parent().change_display_color(Color.yellow)
 	elif (start < end) and (newTime >= start and newTime < end): # When time is between start and end without wraparound
-		print("TRUE2", ", ", start, ", ", newTime, ", ", end)
+#		print("TRUE2", ", ", start, ", ", newTime, ", ", end)
 		self.get_parent().get_parent().change_display_color(Color.yellow)
 	else:
-		print("FALSE", ", ", start, ", ", newTime, ", ", end)
+#		print("FALSE", ", ", start, ", ", newTime, ", ", end)
 		self.get_parent().get_parent().change_display_color(Color.white)
 
 

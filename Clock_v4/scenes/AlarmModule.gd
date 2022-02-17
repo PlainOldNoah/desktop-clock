@@ -12,8 +12,6 @@ onready var _status_label = $MarginContainer/VBoxContainer/HBoxContainer/StatusL
 onready var _progress_bar = $MarginContainer/VBoxContainer/HBoxContainer/ProgressBar
 onready var TweenNode = $Tween
 
-onready var _chime_sound: AudioStreamPlayer = $ChimeSound
-
 var curr_min:int = 0 # The current time
 var curr_hr:int = 0
 var slider_min:int = 0 # The value of the sliders
@@ -115,15 +113,8 @@ func reset_progress_bar():
 # Controls the repeating chime while the alarm is set to ACTIVATED
 func sound_alarm():
 	while alarm_status == AlarmStatus.ACTIVATED:
-		play_chime(4)
+		Manager.play_chime(4)
 		yield(get_tree().create_timer(1), "timeout")
-
-
-# Takes in an int and plays the chime that many times
-func play_chime(count:int):
-	for i in count:
-		_chime_sound.play()
-		yield(_chime_sound, "finished")
 
 
 # Updates the text and color of the alarm status label

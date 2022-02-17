@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scenes/AlarmModule.gd" type="Script" id=1]
-[ext_resource path="res://assets/BurstOne.wav" type="AudioStream" id=2]
 [ext_resource path="res://assets/main_theme.theme" type="Theme" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
@@ -158,9 +157,6 @@ size_flags_horizontal = 3
 shortcut_in_tooltip = false
 enabled_focus_mode = 0
 text = "Reset"
-
-[node name="ChimeSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 2 )
 
 [node name="Tween" type="Tween" parent="."]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/ProgressBar" to="." method="_on_ProgressBar_value_changed"]
