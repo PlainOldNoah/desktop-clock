@@ -48,7 +48,7 @@ __meta__ = {
 margin_left = 6.0
 margin_top = 6.0
 margin_right = 322.0
-margin_bottom = 468.0
+margin_bottom = 480.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
@@ -66,7 +66,6 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 312.0
 margin_bottom = 70.0
-size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_constants/margin_right = 3
 custom_constants/margin_top = 2
@@ -78,7 +77,6 @@ margin_left = 4.0
 margin_top = 2.0
 margin_right = 305.0
 margin_bottom = 64.0
-size_flags_horizontal = 0
 size_flags_vertical = 3
 custom_constants/separation = 3
 
@@ -162,12 +160,12 @@ margin_bottom = 212.0
 [node name="HealthModule" parent="VBoxContainer" instance=ExtResource( 7 )]
 margin_top = 216.0
 margin_right = 316.0
-margin_bottom = 342.0
+margin_bottom = 354.0
 
 [node name="SettingsBase" type="PanelContainer" parent="VBoxContainer"]
-margin_top = 346.0
+margin_top = 358.0
 margin_right = 316.0
-margin_bottom = 462.0
+margin_bottom = 474.0
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/SettingsBase"]
 margin_left = 4.0
@@ -255,8 +253,8 @@ step = 2.0
 value = 48.0
 
 [node name="Timer" type="Timer" parent="."]
-[connection signal="new_time" from="." to="VBoxContainer/HealthModule" method="_on_BaseNode_new_time"]
 [connection signal="new_time" from="." to="VBoxContainer/AlarmModule" method="_on_BaseNode_new_time"]
+[connection signal="new_time" from="." to="VBoxContainer/HealthModule" method="_on_BaseNode_new_time"]
 [connection signal="toggled" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/ToggleAlarmButton" to="." method="_on_ToggleAlarmButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/ToggleHealthButton" to="." method="_on_ToggleHealthButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/ToggleSettingsButton" to="." method="_on_ToggleSettingsButton_toggled"]

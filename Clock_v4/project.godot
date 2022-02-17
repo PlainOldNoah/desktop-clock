@@ -22,6 +22,10 @@ run/low_processor_mode=true
 config/icon="res://assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
 
+[autoload]
+
+Manager="*res://scenes/Manager.tscn"
+
 [display]
 
 window/size/width=328

@@ -24,15 +24,24 @@ func _ready():
 func recieved_new_time(hour, minute):
 	var newTime = ((hour * 60) + minute) % 1440
 	
+	check_if_night_mode(newTime)
+
+
+# Compare raw minutes to night mode's start and end, then change color of display
+func check_if_night_mode(newTime:int):
 	var start = nightModeStart["rawMinutes"] % 1440
 	var end = nightModeEnd["rawMinutes"] % 1440
 	
-	if (start >= end) and ((newTime >= start and newTime <= 1440) or (newTime >= 0 and newTime < end)): # When time is between start and end (or equal) with wraparound
+#	if (start >= end) and ((newTime >= start and newTime <= 1440) or (newTime >= 0 and newTime < end)): # When time is between start and end (or equal) with wraparound
+	if (start >= end) and not ((end < newTime) and (newTime <= start)): # When time is between start and end (or equal) with wraparound
 		print("TRUE", ", ", start, ", ", newTime, ", ", end)
+		self.get_parent().get_parent().change_display_color(Color.yellow)
 	elif (start < end) and (newTime >= start and newTime < end): # When time is between start and end without wraparound
 		print("TRUE2", ", ", start, ", ", newTime, ", ", end)
+		self.get_parent().get_parent().change_display_color(Color.yellow)
 	else:
 		print("FALSE", ", ", start, ", ", newTime, ", ", end)
+		self.get_parent().get_parent().change_display_color(Color.white)
 
 
 # Sets the text of the label based on the slider times and toggle button state
@@ -83,23 +92,27 @@ func time_calc(minutes:int) -> Dictionary:
 # USED FOR TESTING FEATURES
 func RUN_TEST(): 
 	# TESTING FOR CHECKING IF A TIME IS WITHIN THE NIGHT MODE SLIDERS
-	var debug_start = nightModeStart["rawMinutes"] - 5
-	if debug_start < 0: debug_start += 1440
-	print("\n")
+#	var debug_start = nightModeStart["rawMinutes"] - 5
+#	if debug_start < 0: debug_start += 1440
+#	print("\n")
+#	for i in 10:
+#		recieved_new_time(0, debug_start + i)
+#	print("\n")
+#	debug_start = nightModeEnd["rawMinutes"] - 5
+#	if debug_start < 0: debug_start += 1440
+#	for i in 10:
+#		recieved_new_time(0, debug_start + i)
+	
+	# 6 = 360, 930 = 570
 	for i in 10:
-		recieved_new_time(0, debug_start + i)
-	print("\n")
-	debug_start = nightModeEnd["rawMinutes"] - 5
-	if debug_start < 0: debug_start += 1440
-	for i in 10:
-		recieved_new_time(0, debug_start + i)
+		check_if_night_mode(1285 + i)
 
 
 # ====================================================================== SIGNALS
 
 
 func _on_BaseNode_new_time(hour, minute):
-	pass
+	recieved_new_time(hour, minute)
 
 
 func _on_MovementMinSlide_value_changed(value):

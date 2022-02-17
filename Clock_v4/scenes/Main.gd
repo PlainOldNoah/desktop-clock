@@ -26,6 +26,7 @@ func _ready():
 #	alarm_module.recieve_new_time(hour, minute) # Init the alarm with the current time
 	sync_buttons_with_features()
 	refresh_ui_size()
+	Manager.probe()
 
 
 # Rapidly checks the time to get exactly when the second switches over
@@ -81,6 +82,11 @@ func update_display():
 	display_label.text = "%02d:%02d:%02d" % [hour, minute, second]
 
 
+# Takes in a color and changes the display's font color
+func change_display_color(color:Color):
+	display_label.add_color_override("font_color", color)
+
+
 # Adjusts features based on button state
 func sync_buttons_with_features():
 	alarm_module.visible = false
@@ -126,7 +132,6 @@ func _on_FontSizeSlider_gui_input(event):
 func _on_ToggleAlarmButton_toggled(button_pressed):
 	alarm_module.visible = button_pressed
 	refresh_ui_size()
-
 
 # Toggles the visibility of the settings module
 func _on_ToggleSettingsButton_toggled(button_pressed):
