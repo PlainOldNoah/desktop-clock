@@ -140,7 +140,7 @@ text = "Start"
 
 [node name="AlarmEnd" type="Button" parent="MarginContainer/VBoxContainer/AlarmControlButtons"]
 margin_left = 92.0
-margin_right = 174.0
+margin_right = 175.0
 margin_bottom = 24.0
 focus_mode = 0
 size_flags_horizontal = 3
@@ -149,7 +149,7 @@ enabled_focus_mode = 0
 text = "End"
 
 [node name="AlarmReset" type="Button" parent="MarginContainer/VBoxContainer/AlarmControlButtons"]
-margin_left = 184.0
+margin_left = 185.0
 margin_right = 268.0
 margin_bottom = 24.0
 focus_mode = 0
@@ -159,6 +159,7 @@ enabled_focus_mode = 0
 text = "Reset"
 
 [node name="Tween" type="Tween" parent="."]
+
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/ProgressBar" to="." method="_on_ProgressBar_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/SliderHBox/SliderBars/MinAlarmSlider" to="." method="_on_MinAlarmSlider_value_changed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/SliderHBox/SliderBars/HrAlarmSlider" to="." method="_on_HrAlarmSlider_value_changed"]

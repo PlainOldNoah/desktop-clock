@@ -262,8 +262,8 @@ value = 48.0
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="new_time" from="." to="VBoxContainer/AlarmModule" method="_on_BaseNode_new_time"]
-[connection signal="new_time" from="." to="VBoxContainer/HealthModule" method="_on_BaseNode_new_time"]
+[connection signal="new_minute" from="." to="VBoxContainer/AlarmModule" method="_on_BaseNode_new_minute"]
+[connection signal="new_minute" from="." to="VBoxContainer/HealthModule" method="_on_BaseNode_new_minute"]
 [connection signal="toggled" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/ToggleAlarmButton" to="." method="_on_ToggleAlarmButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/ToggleHealthButton" to="." method="_on_ToggleHealthButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/ToggleSettingsButton" to="." method="_on_ToggleSettingsButton_toggled"]

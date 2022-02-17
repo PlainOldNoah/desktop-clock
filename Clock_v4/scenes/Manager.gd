@@ -12,6 +12,23 @@ func probe():
 # ============================================================ GETTERS
 
 
+# Returns a dict of all needed time values
+func get_full_time() -> Dictionary:
+	var time = OS.get_time()
+	var output = {
+		"h24":time.hour,
+		"h12":time.hour,
+		"min":time.minute,
+		"sec":time.second,
+		"raw":(time.hour * 60) + time.minute,
+	}
+	
+	output.h12 %= 12
+	if output.h12 < 1: output.h12 += 12
+	
+	return output
+
+
 # Returns dict of 24-hour time hour, minute, second from the OS
 func get_24HMS() -> Dictionary:
 	return OS.get_time()
@@ -31,17 +48,7 @@ func get_12HMS() -> Dictionary:
 # 0 == 1440 == midnight
 func get_raw_mins() -> int:
 	var temp = get_24HMS()
-	return ((temp.hour * 60) + temp.minute)
-
-
-func get_full_time() -> Dictionary:
-	var output = {
-		"H12":0,
-		"H24":0,
-		"Min":0,
-		"Raw":0,
-	}
-	return output
+	return (temp.hour * 60) + temp.minutes
 
 
 # Returns raw minutes from a given hour and minutes

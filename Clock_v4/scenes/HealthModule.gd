@@ -111,10 +111,6 @@ func RUN_TEST():
 # ====================================================================== SIGNALS
 
 
-func _on_BaseNode_new_time(hour, minute):
-	recieved_new_time(hour, minute)
-
-
 func _on_MovementMinSlide_value_changed(value):
 	pass # Replace with function body.
 
@@ -139,3 +135,7 @@ func _on_NightModeBtn_toggled(button_pressed):
 
 func _on_MovementBtn_toggled(button_pressed):
 	RUN_TEST()
+
+
+func _on_BaseNode_new_minute(raw_minute):
+	recieved_new_time(0, 0)

@@ -78,8 +78,12 @@ func set_alarm_status(new_status: int):
 
 # Add the current time to the slider values to create the alarm time and then set the status label
 func prepare_alarm():
-	alarm_hr = curr_hr + slider_hr
+	alarm_hr = curr_hr + slider_hr + 12
 	alarm_min = curr_min + slider_min
+	
+	print(Manager.convert_to_human_time(((alarm_hr * 60) + alarm_min)))
+	
+	var alarm_time:int = 0
 	
 	if alarm_min >= 60: # Keep minutes between 0 and 59
 		alarm_min -= 60
@@ -167,5 +171,5 @@ func _on_AlarmReset_pressed():
 	reset_slider_values()
 
 
-func _on_BaseNode_new_time(hour, minute):
-	recieve_new_time(hour, minute)
+func _on_BaseNode_new_minute(raw_minute):
+	recieve_new_time(0, 0)
