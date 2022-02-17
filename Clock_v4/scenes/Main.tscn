@@ -36,7 +36,7 @@ font_data = ExtResource( 5 )
 
 [node name="BaseNode" type="PanelContainer"]
 margin_right = 328.0
-margin_bottom = 446.0
+margin_bottom = 486.0
 theme = ExtResource( 6 )
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 2 )
@@ -261,6 +261,7 @@ step = 2.0
 value = 48.0
 
 [node name="Timer" type="Timer" parent="."]
+
 [connection signal="new_time" from="." to="VBoxContainer/AlarmModule" method="_on_BaseNode_new_time"]
 [connection signal="new_time" from="." to="VBoxContainer/HealthModule" method="_on_BaseNode_new_time"]
 [connection signal="toggled" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/ToggleAlarmButton" to="." method="_on_ToggleAlarmButton_toggled"]
