@@ -80,9 +80,10 @@ func start_alarm_tween():
 # Unless the alarm is activated stop all current tweens and refill the progress bar
 func reset_progress_bar():
 	if alarm_status != AlarmStatus.ACTIVATED: # If the alarm is active do NOT refill the progress bar
-		TweenNode.stop_all()
+		TweenNode.remove_all()
 		TweenNode.interpolate_property(progress_bar, "value", progress_bar.value, 100, 0.2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT) # Refill the bar
 		TweenNode.start()
+
 
 # Controls the repeating chime while the alarm is set to ACTIVATED
 func sound_alarm():
