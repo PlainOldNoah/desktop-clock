@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=2]
 
-[ext_resource path="res://assets/Gear_Icon.png" type="Texture" id=1]
-[ext_resource path="res://scenes/Main.gd" type="Script" id=2]
-[ext_resource path="res://assets/Bell_Icon.png" type="Texture" id=3]
-[ext_resource path="res://scenes/AlarmModule.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/7segments.otf" type="DynamicFontData" id=5]
-[ext_resource path="res://assets/main_theme.theme" type="Theme" id=6]
-[ext_resource path="res://scenes/HealthModule.tscn" type="PackedScene" id=7]
-[ext_resource path="res://assets/Heart_Icon.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Gear_Icon.png" type="Texture" id=1]
+[ext_resource path="res://Scenes/Main.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Bell_Icon.png" type="Texture" id=3]
+[ext_resource path="res://Scenes/AlarmModule.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/7segments.otf" type="DynamicFontData" id=5]
+[ext_resource path="res://Assets/main_theme.theme" type="Theme" id=6]
+[ext_resource path="res://Scenes/HealthModule.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/Heart_Icon.png" type="Texture" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 6.0

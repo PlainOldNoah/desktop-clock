@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/BurstOne.wav-b5f81e5427e9b4411869416d14498080.sample"
+path="res://.import/BurstOne.wav-42b134aeea46a5d7a2f5da36a7ae236e.sample"
 
 [deps]
 
-source_file="res://assets/BurstOne.wav"
-dest_files=[ "res://.import/BurstOne.wav-b5f81e5427e9b4411869416d14498080.sample" ]
+source_file="res://Assets/BurstOne.wav"
+dest_files=[ "res://.import/BurstOne.wav-42b134aeea46a5d7a2f5da36a7ae236e.sample" ]
 
 [params]
 

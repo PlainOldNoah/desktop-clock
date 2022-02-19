@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://scenes/Manager.gd" type="Script" id=1]
-[ext_resource path="res://assets/BurstOne.wav" type="AudioStream" id=2]
+[ext_resource path="res://Scenes/Manager.gd" type="Script" id=1]
+[ext_resource path="res://Assets/BurstOne.wav" type="AudioStream" id=2]
 
 [node name="Manger" type="Node"]
 script = ExtResource( 1 )

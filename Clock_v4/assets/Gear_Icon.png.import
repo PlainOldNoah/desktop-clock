@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Gear_Icon.png-5b1b000f8431ec93afb5f002701978b0.stex"
+path="res://.import/Gear_Icon.png-8b6b3006a53354c5dc65f031da99857e.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Gear_Icon.png"
-dest_files=[ "res://.import/Gear_Icon.png-5b1b000f8431ec93afb5f002701978b0.stex" ]
+source_file="res://Assets/Gear_Icon.png"
+dest_files=[ "res://.import/Gear_Icon.png-8b6b3006a53354c5dc65f031da99857e.stex" ]
 
 [params]
 
@@ -28,6 +28,7 @@ process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
 process/invert_color=false
+process/normal_map_invert_y=false
 stream=false
 size_limit=0
 detect_3d=true

@@ -10,16 +10,16 @@ config_version=4
 
 [application]
 
-config/name="Clock II"
+config/name="Clock IV"
 config/description="A desktop clock with alarm functions."
 run/main_scene="res://Scenes/Main.tscn"
 run/low_processor_mode=true
-config/icon="res://assets/icon.png"
+config/icon="res://Assets/icon.png"
 config/windows_native_icon="res://assets/icon.ico"
 
 [autoload]
 
-Manager="*res://scenes/Manager.tscn"
+Manager="*res://Scenes/Manager.tscn"
 
 [display]
 
