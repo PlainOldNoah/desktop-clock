@@ -9,6 +9,7 @@ onready var health_module = $VBoxContainer/HealthModule
 onready var display_label:Label = find_node("TimeLabel")
 onready var display_label_bg:Label = find_node("TimeLabelBackground")
 onready var font_size_label:Label = find_node("FontSizeLabel")
+onready var grid_container:GridContainer = find_node("GridContainer")
 onready var timer:Timer = $Timer
 
 var pastMinute:int = -1 # Used to detect minute changes
@@ -18,7 +19,6 @@ var halfHourlyChime:bool = true
 
 
 func _ready():
-	Manager.probe()
 	set_time()
 	sync_with_system_time()
 	sync_buttons_with_features()
@@ -97,6 +97,13 @@ func _on_FontSizeSlider_value_changed(value):
 	display_label.get_font("font").size = value
 	display_label_bg.get_font("font").size = value
 	font_size_label.text = ("Display Size (%d)" % [value])
+	
+	if value <= 34:
+		grid_container.set("columns", 4)
+	elif value >= 70:
+		grid_container.set("columns", 1)
+	else:
+		grid_container.set("columns", 2)
 
 
 # Refresh the UI size if the user clicks or scrolls over the font size slider
@@ -144,7 +151,3 @@ func _on_ToggleHourChime_toggled(button_pressed):
 func _on_ToggleHalfHourChime_toggled(button_pressed):
 	halfHourlyChime = button_pressed
 
-
-
-func _on_TEST_pressed():
-	pass

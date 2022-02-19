@@ -4,11 +4,6 @@ onready var TweenNode:Tween = $Tween
 onready var Chime:AudioStreamPlayer = $Chime
 
 
-# Prints the status of the manager
-func probe():
-	print_debug("Manager is responding")
-
-
 # ============================================================ GETTERS
 
 

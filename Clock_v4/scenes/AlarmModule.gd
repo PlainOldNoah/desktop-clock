@@ -59,7 +59,7 @@ func set_alarm_status(new_status: int):
 			sound_alarm()
 			set_status_label("[Alarm Active]  " + text, Color.red)
 		AlarmStatus.OFF:
-			set_status_label("No Alarm Set", Color.white)
+			set_status_label("[No Alarm Set]", Color.white)
 		AlarmStatus.PREP:
 			set_status_label("[Alarm Idle]  " + text, Color.yellow)
 		AlarmStatus.SET:
