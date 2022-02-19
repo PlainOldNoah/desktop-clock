@@ -4,8 +4,8 @@
 [ext_resource path="res://scenes/HealthModule.gd" type="Script" id=2]
 
 [node name="HealthModule" type="PanelContainer"]
-margin_right = 273.0
-margin_bottom = 126.0
+margin_right = 281.0
+margin_bottom = 138.0
 theme = ExtResource( 1 )
 script = ExtResource( 2 )
 __meta__ = {
@@ -15,41 +15,35 @@ __meta__ = {
 [node name="MarginContainer" type="MarginContainer" parent="."]
 margin_left = 4.0
 margin_top = 4.0
-margin_right = 275.0
+margin_right = 277.0
 margin_bottom = 134.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 261.0
+margin_right = 263.0
 margin_bottom = 120.0
-custom_constants/separation = 10
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
-margin_right = 251.0
-margin_bottom = 110.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/separation = 10
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-margin_right = 251.0
+[node name="NightModeBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 253.0
 margin_bottom = 76.0
 custom_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
-margin_right = 251.0
+[node name="NightModeInfoBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NightModeBox"]
+margin_right = 253.0
 margin_bottom = 24.0
 custom_constants/separation = 10
 
-[node name="NightModeBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_right = 90.0
+[node name="NightModeBtn" type="Button" parent="MarginContainer/VBoxContainer/NightModeBox/NightModeInfoBox"]
+margin_right = 92.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 90, 0 )
 focus_mode = 0
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -57,22 +51,35 @@ toggle_mode = true
 shortcut_in_tooltip = false
 pressed = true
 enabled_focus_mode = 0
-text = "Night Mode"
+text = " Night Mode "
 
-[node name="NightModeLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer"]
-margin_left = 100.0
+[node name="NightModeLabel" type="Label" parent="MarginContainer/VBoxContainer/NightModeBox/NightModeInfoBox"]
+margin_left = 102.0
 margin_top = 5.0
-margin_right = 251.0
+margin_right = 253.0
 margin_bottom = 19.0
 size_flags_horizontal = 3
 text = "Set from 00:00 to 00:00"
 align = 1
 valign = 1
 
-[node name="NightStartSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+[node name="NightStartBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NightModeBox"]
 margin_top = 34.0
-margin_right = 251.0
+margin_right = 253.0
 margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/NightModeBox/NightStartBox"]
+margin_top = 1.0
+margin_right = 30.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 0 )
+text = "Start"
+
+[node name="NightStartSlider" type="HSlider" parent="MarginContainer/VBoxContainer/NightModeBox/NightStartBox"]
+margin_left = 34.0
+margin_right = 253.0
+margin_bottom = 16.0
+focus_mode = 1
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1440.0
@@ -81,10 +88,23 @@ rounded = true
 tick_count = 5
 ticks_on_borders = true
 
-[node name="NightEndSlider" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2"]
+[node name="NightEndBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer/NightModeBox"]
 margin_top = 60.0
-margin_right = 251.0
+margin_right = 253.0
 margin_bottom = 76.0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/NightModeBox/NightEndBox"]
+margin_top = 1.0
+margin_right = 30.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 30, 0 )
+text = "End"
+
+[node name="NightEndSlider" type="HSlider" parent="MarginContainer/VBoxContainer/NightModeBox/NightEndBox"]
+margin_left = 34.0
+margin_right = 253.0
+margin_bottom = 16.0
+focus_mode = 1
 size_flags_horizontal = 3
 size_flags_vertical = 4
 max_value = 1440.0
@@ -93,26 +113,27 @@ rounded = true
 tick_count = 5
 ticks_on_borders = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="RecessBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 86.0
-margin_right = 251.0
+margin_right = 253.0
 margin_bottom = 110.0
 custom_constants/separation = 10
 
-[node name="MovementBtn" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-margin_right = 83.0
+[node name="ToggleRecessButton" type="Button" parent="MarginContainer/VBoxContainer/RecessBox"]
+margin_right = 63.0
 margin_bottom = 24.0
-rect_min_size = Vector2( 83, 0 )
 focus_mode = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 toggle_mode = true
 shortcut_in_tooltip = false
 pressed = true
 enabled_focus_mode = 0
-text = "Movement"
+text = " Recess "
 
-[node name="MovementMinSlide" type="HSlider" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 93.0
-margin_right = 189.0
+[node name="RecessMinSlide" type="HSlider" parent="MarginContainer/VBoxContainer/RecessBox"]
+margin_left = 73.0
+margin_right = 191.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -121,18 +142,18 @@ rounded = true
 tick_count = 5
 ticks_on_borders = true
 
-[node name="MovementLabel" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
-margin_left = 199.0
+[node name="RecessLabel" type="Label" parent="MarginContainer/VBoxContainer/RecessBox"]
+margin_left = 201.0
 margin_top = 5.0
-margin_right = 251.0
+margin_right = 253.0
 margin_bottom = 19.0
 rect_min_size = Vector2( 52, 0 )
-size_flags_vertical = 6
+size_flags_horizontal = 0
 text = "0 Mins"
-align = 2
 valign = 1
-[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/HBoxContainer/NightModeBtn" to="." method="_on_NightModeBtn_toggled"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/NightStartSlider" to="." method="_on_NightStartSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/VBoxContainer2/NightEndSlider" to="." method="_on_NightEndSlider_value_changed"]
-[connection signal="toggled" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/MovementBtn" to="." method="_on_MovementBtn_toggled"]
-[connection signal="value_changed" from="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer2/MovementMinSlide" to="." method="_on_MovementMinSlide_value_changed"]
+
+[connection signal="toggled" from="MarginContainer/VBoxContainer/NightModeBox/NightModeInfoBox/NightModeBtn" to="." method="_on_NightModeBtn_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/NightModeBox/NightStartBox/NightStartSlider" to="." method="_on_NightStartSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/NightModeBox/NightEndBox/NightEndSlider" to="." method="_on_NightEndSlider_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/RecessBox/ToggleRecessButton" to="." method="_on_ToggleRecessButton_toggled"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/RecessBox/RecessMinSlide" to="." method="_on_RecessMinSlide_value_changed"]

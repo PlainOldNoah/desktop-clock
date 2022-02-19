@@ -42,7 +42,6 @@ func set_time():
 	var time: Dictionary = Manager.get_full_time()
 	
 	if pastMinute != time.raw:
-		print("NEW_MIN", pastMinute, ", ", time.raw)
 		periodic_chimes(time.raw)
 		emit_signal("new_minute", time.raw)
 	pastMinute = time.raw
@@ -52,7 +51,7 @@ func set_time():
 
 # Plays chimes on the hour and half hour if toggled
 func periodic_chimes(check_min:int):
-	if hourlyChime and check_min % 11 == 0: # Hourly Chime
+	if hourlyChime and check_min % 60 == 0: # Hourly Chime
 		Manager.play_chime(3)
 	elif halfHourlyChime and check_min % 30 == 0: # Half-Hourly Chime
 		Manager.play_chime(2)
@@ -106,6 +105,14 @@ func _on_FontSizeSlider_gui_input(event):
 		refresh_ui_size()
 
 
+# Recieved when night mode is turned on then changes the color of the display depending on the state
+func _on_HealthModule_night_mode_active(status):
+	if status == true:
+		Manager.tween_label_color_change(display_label, Color.white, Color.yellow, 1)
+	else:
+		Manager.tween_label_color_change(display_label, display_label.get_color("font_color"), Color.white, 1)
+
+
 # ---------------------------------------------------------------------- TOGGLE BUTTONS
 
 
@@ -138,10 +145,6 @@ func _on_ToggleHalfHourChime_toggled(button_pressed):
 	halfHourlyChime = button_pressed
 
 
-func _on_TEST_pressed():
-	
-#	Manager.tween_label_color_change(display_label, Color.red, Color.yellow, 2) # Option 1
 
-#	Manager.TweenNode.interpolate_property(display_label, "custom_colors/font_color", Color.aliceblue, Color.yellow, 2, Tween.TRANS_LINEAR) # Tick down the progress bar as time passes OPTION 2
-#	Manager.TweenNode.start()
+func _on_TEST_pressed():
 	pass

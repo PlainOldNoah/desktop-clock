@@ -1,7 +1,7 @@
 extends Node
 
-onready var TweenNode = $Tween
-onready var Chime = $Chime
+onready var TweenNode:Tween = $Tween
+onready var Chime:AudioStreamPlayer = $Chime
 
 
 # Prints the status of the manager
@@ -71,13 +71,13 @@ func convert_to_human_time(raw_mins:int, HR12:bool=true) -> String:
 		meridian = "a" if raw_mins < 720 else "p"
 		
 	# Set hour
-	var hour:int = raw_mins / 60
+	var hour:int = int(raw_mins / 60)
 	if HR12 == true:
 		hour %= 12
 		if hour < 1: hour += 12
 		
 	var output:String = "%d:%02d%s" % [hour, (raw_mins % 60), meridian]
-	return(str(raw_mins) + " -> " + output)
+	return(output)
 
 
 # ============================================================ FUNCS

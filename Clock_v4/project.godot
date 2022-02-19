@@ -32,6 +32,10 @@ window/size/height=84
 window/size/resizable=false
 window/size/always_on_top=true
 
+[global]
+
+ignore=false
+
 [input]
 
 click={

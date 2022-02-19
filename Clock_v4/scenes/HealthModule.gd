@@ -1,128 +1,97 @@
 extends PanelContainer
 
-enum State {DISABLED, IDLE, ACTIVE}
-export(State) var nightModeState = State.DISABLED
+signal night_mode_active(status)
 
 onready var night_start_slider:HSlider = find_node("NightStartSlider")
 onready var night_end_slider:HSlider = find_node("NightEndSlider")
 onready var night_mode_label:Label = find_node("NightModeLabel")
+onready var recess_label:Label = find_node("RecessLabel")
 
 var nightMode:bool = true
-var movementBreak:bool = true
+var recessMode:bool = true
 
-var nightModeStart:Dictionary = time_calc(1410) # 11:30p
-var nightModeEnd:Dictionary = time_calc(360)    # 6:00p
+var current_time:int = 0
+var nightStart:int = 1410 # 11:30p
+var nightEnd:int = 360 # 6:00p
+var recessInterval:int = 0 # Value of slider
+var recessNextAlarm:int = 0
 
 
 func _ready():
+	yield(get_tree().get_root(), "ready")
 	set_night_mode_text()
-	night_start_slider.value = 1410
-	night_end_slider.value = 360
+	night_start_slider.value = nightStart
+	night_end_slider.value = nightEnd
 
 
 # Takes in an hour and minute and converts it to raw minutes then compares it to the night mode sliders
-func recieved_new_time(hour, minute):
-	var newTime = ((hour * 60) + minute) % 1440
-	
-	check_if_night_mode(newTime)
+func recieve_new_time(raw_minute):
+	check_if_night_mode(raw_minute)
+	check_if_recess_time(raw_minute)
 
 
-# Compare raw minutes to night mode's start and end, then change color of display
+# Compare raw minutes to night mode's nightStart and nightEnd, then change color of display
 func check_if_night_mode(newTime:int):
-	var start = nightModeStart["rawMinutes"] % 1440
-	var end = nightModeEnd["rawMinutes"] % 1440
-	
-#	if (start >= end) and ((newTime >= start and newTime <= 1440) or (newTime >= 0 and newTime < end)): # When time is between start and end (or equal) with wraparound
-	if (start >= end) and not ((end < newTime) and (newTime <= start)): # When time is between start and end (or equal) with wraparound
-#		print("TRUE", ", ", start, ", ", newTime, ", ", end)
-		self.get_parent().get_parent().change_display_color(Color.yellow)
-	elif (start < end) and (newTime >= start and newTime < end): # When time is between start and end without wraparound
-#		print("TRUE2", ", ", start, ", ", newTime, ", ", end)
-		self.get_parent().get_parent().change_display_color(Color.yellow)
+	if (nightStart >= nightEnd) and not ((newTime < nightStart) and (newTime >= nightEnd)): # When time is between nightStart and nightEnd (or equal) with wraparound
+		emit_signal("night_mode_active", true)
+	elif (nightStart < nightEnd) and (newTime >= nightStart and newTime < nightEnd): # When time is between nightStart and nightEnd without wraparound
+		emit_signal("night_mode_active", true)
 	else:
-#		print("FALSE", ", ", start, ", ", newTime, ", ", end)
-		self.get_parent().get_parent().change_display_color(Color.white)
+		emit_signal("night_mode_active", false)
 
 
 # Sets the text of the label based on the slider times and toggle button state
 func set_night_mode_text():
-	var output:String = ""
-	if nightMode:
-		output += "Active: "
-	else:
-		output += "Disabled: "
+	var output:String = "Active: " if nightMode else "Disabled: "
 	
-	if nightModeStart["24Hour"] == 0 and nightModeStart["minutes"] == 0:
-		output += "Midnight"
-	elif nightModeStart["24Hour"] == 12 and nightModeStart["minutes"] == 0:
-		output += "Noon"
-	else:
-		output += str(nightModeStart["12Hour"]) + ":" + str(nightModeStart["minutes"]).pad_zeros(2)
-	
-	output += " - "
-	
-	if nightModeEnd["24Hour"] == 0 and nightModeEnd["minutes"] == 0:
-		output += "Midnight"
-	elif nightModeEnd["24Hour"] == 12 and nightModeEnd["minutes"] == 0:
-		output += "Noon"
-	else:
-		output += str(nightModeEnd["12Hour"]) + ":" + str(nightModeEnd["minutes"]).pad_zeros(2)
+	output += Manager.convert_to_human_time(nightStart) + " - "
+	output += Manager.convert_to_human_time(nightEnd)
 	
 	night_mode_label.set_text(output)
 
 
-# Takes in a int (raw minutes) that represents the num of mins from midnight
-# Returns a dictionary of 12 Hour and 24 Hour time as well as remainder minutes and raw minutes
-func time_calc(minutes:int) -> Dictionary:
-	var output:Dictionary = {
-		"rawMinutes": minutes % 1441, # 1440 is max mins and included so use 1440 + 1
-		"minutes": minutes % 60,
-		"24Hour": (minutes / 60) % 24,
-		"12Hour": 0.0,
-	}
-	
-	var temp = output["24Hour"] % 12
-	if temp < 1:
-		temp += 12
-	output["12Hour"] = temp
-	
-	return output
+# Compares an input time to the set recess time
+func check_if_recess_time(newTime:int):
+	if (recessMode) and (newTime == recessNextAlarm):
+		Manager.play_chime(1)
 
 
-# USED FOR TESTING FEATURES
-func RUN_TEST(): 
-	# TESTING FOR CHECKING IF A TIME IS WITHIN THE NIGHT MODE SLIDERS
-#	var debug_start = nightModeStart["rawMinutes"] - 5
-#	if debug_start < 0: debug_start += 1440
-#	print("\n")
-#	for i in 10:
-#		recieved_new_time(0, debug_start + i)
-#	print("\n")
-#	debug_start = nightModeEnd["rawMinutes"] - 5
-#	if debug_start < 0: debug_start += 1440
-#	for i in 10:
-#		recieved_new_time(0, debug_start + i)
+# Sets the recess time and the associated label
+func prep_recess():
+	var output:String = ""
+	if recessMode == false or recessInterval == 0:
+		output = "Off"
+		recessNextAlarm = -1
+	else:
+		recessNextAlarm = (current_time + recessInterval) % 1440
+		output = str(recessInterval) + (" Mins" if recessInterval > 1 else " Min")
 	
-	# 6 = 360, 930 = 570
-	for i in 10:
-		check_if_night_mode(1285 + i)
+	recess_label.set_text(output)
 
 
 # ====================================================================== SIGNALS
 
 
-func _on_MovementMinSlide_value_changed(value):
-	pass # Replace with function body.
+func _on_BaseNode_new_minute(raw_minute):
+	current_time = raw_minute
+	recieve_new_time(raw_minute)
 
 
 func _on_NightStartSlider_value_changed(value):
-	nightModeStart = time_calc(value)
+	nightStart = value
 	set_night_mode_text()
+	check_if_night_mode(current_time)
 
 
 func _on_NightEndSlider_value_changed(value):
-	nightModeEnd = time_calc(value)
+	nightEnd = value
 	set_night_mode_text()
+	check_if_night_mode(current_time)
+
+
+func _on_RecessMinSlide_value_changed(value):
+	recessInterval = value
+	prep_recess()
 
 
 # ---------------------------------------------------------------------- TOGGLE BUTTONS
@@ -133,9 +102,6 @@ func _on_NightModeBtn_toggled(button_pressed):
 	set_night_mode_text()
 
 
-func _on_MovementBtn_toggled(button_pressed):
-	RUN_TEST()
-
-
-func _on_BaseNode_new_minute(raw_minute):
-	recieved_new_time(0, 0)
+func _on_ToggleRecessButton_toggled(button_pressed):
+	recessMode = button_pressed
+	prep_recess()

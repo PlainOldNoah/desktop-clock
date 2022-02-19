@@ -48,12 +48,12 @@ margin_right = 278.0
 margin_bottom = 118.0
 custom_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="ProgressBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_right = 268.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 0, 20 )
 
-[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer/ProgressBox"]
 margin_right = 138.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 138, 0 )
@@ -62,7 +62,7 @@ size_flags_vertical = 3
 text = "No Alarm Set"
 valign = 1
 
-[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/ProgressBox"]
 margin_left = 142.0
 margin_right = 268.0
 margin_bottom = 20.0
@@ -71,56 +71,61 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
+value = 100.0
 percent_visible = false
 
-[node name="SliderHBox" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="SlidersBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
 margin_top = 30.0
 margin_right = 268.0
 margin_bottom = 72.0
 custom_constants/separation = 10
 
-[node name="SliderBars" type="VBoxContainer" parent="MarginContainer/VBoxContainer/SliderHBox"]
-margin_right = 207.0
-margin_bottom = 42.0
+[node name="MinuteSlider" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SlidersBox"]
+margin_right = 268.0
+margin_bottom = 16.0
 size_flags_horizontal = 3
 custom_constants/separation = 10
 
-[node name="MinAlarmSlider" type="HSlider" parent="MarginContainer/VBoxContainer/SliderHBox/SliderBars"]
+[node name="MinAlarmSlider" type="HSlider" parent="MarginContainer/VBoxContainer/SlidersBox/MinuteSlider"]
 margin_right = 207.0
 margin_bottom = 16.0
-focus_mode = 0
+focus_mode = 1
 size_flags_horizontal = 3
 max_value = 60.0
 rounded = true
 tick_count = 5
 ticks_on_borders = true
 
-[node name="HrAlarmSlider" type="HSlider" parent="MarginContainer/VBoxContainer/SliderHBox/SliderBars"]
-margin_top = 26.0
-margin_right = 207.0
-margin_bottom = 42.0
-focus_mode = 0
-size_flags_horizontal = 3
-max_value = 12.0
-
-[node name="SliderInfo" type="VBoxContainer" parent="MarginContainer/VBoxContainer/SliderHBox"]
+[node name="AlarmMins" type="Label" parent="MarginContainer/VBoxContainer/SlidersBox/MinuteSlider"]
 margin_left = 217.0
+margin_top = 1.0
+margin_right = 268.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 51, 0 )
+text = "0 Mins"
+
+[node name="HourSlider" type="HBoxContainer" parent="MarginContainer/VBoxContainer/SlidersBox"]
+margin_top = 26.0
 margin_right = 268.0
 margin_bottom = 42.0
 rect_min_size = Vector2( 51, 0 )
+size_flags_vertical = 4
 custom_constants/separation = 10
 
-[node name="AlarmMins" type="Label" parent="MarginContainer/VBoxContainer/SliderHBox/SliderInfo"]
-margin_right = 51.0
-margin_bottom = 14.0
-size_flags_vertical = 0
-text = "0 Mins"
+[node name="HrAlarmSlider" type="HSlider" parent="MarginContainer/VBoxContainer/SlidersBox/HourSlider"]
+margin_right = 207.0
+margin_bottom = 16.0
+focus_mode = 1
+size_flags_horizontal = 3
+max_value = 720.0
+step = 60.0
 
-[node name="AlarmHrs" type="Label" parent="MarginContainer/VBoxContainer/SliderHBox/SliderInfo"]
-margin_top = 24.0
-margin_right = 51.0
-margin_bottom = 38.0
-size_flags_vertical = 0
+[node name="AlarmHrs" type="Label" parent="MarginContainer/VBoxContainer/SlidersBox/HourSlider"]
+margin_left = 217.0
+margin_top = 1.0
+margin_right = 268.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 51, 0 )
 text = "0 Hrs"
 
 [node name="AlarmControlButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
@@ -160,9 +165,9 @@ text = "Reset"
 
 [node name="Tween" type="Tween" parent="."]
 
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/HBoxContainer/ProgressBar" to="." method="_on_ProgressBar_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/SliderHBox/SliderBars/MinAlarmSlider" to="." method="_on_MinAlarmSlider_value_changed"]
-[connection signal="value_changed" from="MarginContainer/VBoxContainer/SliderHBox/SliderBars/HrAlarmSlider" to="." method="_on_HrAlarmSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/ProgressBox/ProgressBar" to="." method="_on_ProgressBar_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/SlidersBox/MinuteSlider/MinAlarmSlider" to="." method="_on_MinAlarmSlider_value_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/SlidersBox/HourSlider/HrAlarmSlider" to="." method="_on_HrAlarmSlider_value_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AlarmControlButtons/AlarmStart" to="." method="_on_AlarmStart_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AlarmControlButtons/AlarmEnd" to="." method="_on_AlarmEnd_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/AlarmControlButtons/AlarmReset" to="." method="_on_AlarmReset_pressed"]

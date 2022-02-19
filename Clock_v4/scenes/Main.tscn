@@ -268,6 +268,7 @@ value = 48.0
 [connection signal="toggled" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/ToggleHealthButton" to="." method="_on_ToggleHealthButton_toggled"]
 [connection signal="toggled" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/ToggleSettingsButton" to="." method="_on_ToggleSettingsButton_toggled"]
 [connection signal="pressed" from="VBoxContainer/DisplayModule/MarginContainer/HBoxContainer/GridContainer/TEST" to="." method="_on_TEST_pressed"]
+[connection signal="night_mode_active" from="VBoxContainer/HealthModule" to="." method="_on_HealthModule_night_mode_active"]
 [connection signal="toggled" from="VBoxContainer/SettingsBase/MarginContainer/VBoxContainer/HBoxContainer2/ToggleHourChime" to="." method="_on_ToggleHourChime_toggled"]
 [connection signal="toggled" from="VBoxContainer/SettingsBase/MarginContainer/VBoxContainer/HBoxContainer2/ToggleHalfHourChime" to="." method="_on_ToggleHalfHourChime_toggled"]
 [connection signal="toggled" from="VBoxContainer/SettingsBase/MarginContainer/VBoxContainer/ToggleTopWindow" to="." method="_on_ToggleTopWindow_toggled"]
